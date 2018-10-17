@@ -1,3 +1,4 @@
+package pack.task2;
 
 public class Distance {
 
