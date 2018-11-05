@@ -12,12 +12,10 @@ public class Point {
 
     }
 
-    public double distance(double x,double y) {
-        double X = this.x - x;
-        double Y = this.y - y;
-        return Math.sqrt(X*X + Y*Y);
-    }
     public double distance(Point p) {
-        return distance(p.x, p.y);
+        double X = this.x - p.x;
+        double Y = this.y - p.y;
+        return Math.sqrt(X*X + Y*Y);
+
     }
 }
