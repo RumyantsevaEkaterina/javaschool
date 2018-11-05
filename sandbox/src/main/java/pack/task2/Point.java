@@ -2,17 +2,22 @@ package pack.task2;
 
 public class Point {
 
-    public double p1;
-    public double p2;
+    public double x;
+    public double y;
 
-    public Point(double p1, double p2)
+    public Point(double x,double y)
     {
-        this.p1=p1;
-        this.p2=p2;
+        this.x=x;
+        this.y=y;
 
     }
 
-    public double distance() {
-        return Math.sqrt(this.p1*this.p1 + this.p2*this.p2);
+    public double distance(double x,double y) {
+        double X = this.x - x;
+        double Y = this.y - y;
+        return Math.sqrt(X*X + Y*Y);
+    }
+    public double distance(Point p) {
+        return distance(p.x, p.y);
     }
 }
