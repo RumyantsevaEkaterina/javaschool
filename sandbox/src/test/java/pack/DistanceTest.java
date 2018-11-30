@@ -1,6 +1,7 @@
-package pack.task2;
+package pack;
 
 import org.testng.annotations.Test;
+import pack.Point;
 
 public class DistanceTest {
 
