@@ -2,7 +2,6 @@ package ru.stqa.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.adressbook.model.BirthdayData;
 import ru.stqa.pft.adressbook.model.PhoneData;
 
@@ -55,6 +54,14 @@ public class ContactHelper extends HelperBase {
 
     public void enterButton() {
         click(By.xpath("(//input[@name='submit'])[2]"));
+    }
+
+    public void editContact() {
+        click(By.xpath("//img[@alt='Edit']"));
+    }
+
+    public void updateContact() {
+        click(By.xpath("(//input[@name='update'])[2]"));
     }
 
 }
