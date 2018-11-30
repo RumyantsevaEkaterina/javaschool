@@ -37,4 +37,6 @@ public class HelperBase {
         click(locator);
         new Select(wd.findElement(locator)).selectByVisibleText(text);
     }
+
+
 }
