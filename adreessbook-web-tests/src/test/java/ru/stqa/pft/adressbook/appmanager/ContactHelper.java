@@ -2,8 +2,8 @@ package ru.stqa.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.stqa.pft.adressbook.model.BirthdayData;
-import ru.stqa.pft.adressbook.model.PhoneData;
+import ru.stqa.pft.adressbook.model.ContactData;
+
 
 public class ContactHelper extends HelperBase {
 
@@ -11,19 +11,16 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void Birthday(BirthdayData birthdayData) {
-        dropDown(By.name("bday"), birthdayData.getDay());
+    public void Birthday(ContactData contactData) {
+        dropDown(By.name("bday"), contactData.getDay());
         click(By.xpath("//option[@value='5']"));
-        dropDown(By.name("bmonth"), birthdayData.getMonth());
+        dropDown(By.name("bmonth"), contactData.getMonth());
         click(By.xpath("//option[@value='1']"));
-        type(By.name("byear"), birthdayData.getYear());
+        type(By.name("byear"), contactData.getYear());
+        type(By.name("home"), contactData.getHomeNumber());
+        type(By.name("mobile"), contactData.getMobileNumber());
     }
 
-    public void PhoneNumber(PhoneData phoneData) {
-        type(By.name("home"), phoneData.getHomeNumber());
-        type(By.name("mobile"), phoneData.getMobileNumber());
-
-    }
 
     public void EmailCreation(String email) {
         type(By.name("email"), email);
