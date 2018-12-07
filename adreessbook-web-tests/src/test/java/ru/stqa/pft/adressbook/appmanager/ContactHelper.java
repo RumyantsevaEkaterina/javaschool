@@ -11,26 +11,20 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void Birthday(ContactData contactData) {
+    public void Contact(ContactData contactData) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("lastname"), contactData.getSecondName());
+        type(By.name("email"), contactData.getEmail());
         dropDown(By.name("bday"), contactData.getDay());
         click(By.xpath("//option[@value='5']"));
         dropDown(By.name("bmonth"), contactData.getMonth());
         click(By.xpath("//option[@value='1']"));
         type(By.name("byear"), contactData.getYear());
-        type(By.name("home"), contactData.getHomeNumber());
         type(By.name("mobile"), contactData.getMobileNumber());
-    }
-
-
-    public void EmailCreation(String email) {
-        type(By.name("email"), email);
 
     }
 
-    public void NameCreation(String firstName, String secondName) {
-        type(By.name("firstname"), firstName);
-        type(By.name("lastname"), secondName);
-    }
+
 
     public void newContactButton() {
         click(By.linkText("add new"));
@@ -61,4 +55,13 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(//input[@name='update'])[2]"));
     }
 
+    public void createContact(ContactData contact) {
+        newContactButton();
+        Contact(contact);
+        enterButton();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
