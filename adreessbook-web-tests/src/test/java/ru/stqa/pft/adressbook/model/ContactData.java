@@ -1,43 +1,58 @@
 package ru.stqa.pft.adressbook.model;
 
 public class ContactData {
-    private int id;
-    private final String firstname;
-    private final String secondname;
-    private final String email;
-    private final String day;
-    private final String month;
-    private final String year;
-    private final String mobileNumber;
+    private int id = Integer.MAX_VALUE;;
+    private String firstname;
+    private String secondname;
+    private String email;
+    private String day;
+    private String month;
+    private String year;
+    private String mobileNumber;
 
 
-    public ContactData(String firstname,String secondname,String email, String day, String month, String year, String mobileNumber) {
-        this.id = Integer.MAX_VALUE;
-        this.firstname = firstname;
-        this.secondname = secondname;
-        this.email = email;
-        this.day = day;
-        this.month = month;
-        this.year = year;
-        this.mobileNumber = mobileNumber;
+    public int getId() {
+        return id;
     }
 
-    public ContactData(int id, String firstname, String secondname, String email, String day, String month, String year, String mobileNumber) {
-        this.id = id;
-        this.firstname = firstname;
-        this.secondname = secondname;
-        this.email = email;
-        this.day = day;
-        this.month = month;
-        this.year = year;
-        this.mobileNumber = mobileNumber;
-    }
-
-    public int getId() { return id;
-    }
-
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id= id;
+        return this;
+    }
+
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withSecondname(String secondname) {
+        this.secondname = secondname;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withDay(String day) {
+        this.day = day;
+        return this;
+    }
+
+    public ContactData withMonth(String month) {
+        this.month = month;
+        return this;
+    }
+
+    public ContactData withYear(String year) {
+        this.year = year;
+        return this;
+    }
+
+    public ContactData withMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+        return this;
     }
 
     public String getFirstName() {
