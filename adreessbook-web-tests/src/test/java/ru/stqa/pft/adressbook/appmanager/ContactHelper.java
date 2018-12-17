@@ -30,6 +30,10 @@ public class ContactHelper extends HelperBase {
 
     }
 
+    public void returnToContactPage() {
+        click(By.linkText("home"));
+    }
+
 
 
     public void newContactButton() {
@@ -71,6 +75,8 @@ public class ContactHelper extends HelperBase {
         selectContact(index);
         deleteContact();
         acceptDeleteContact();
+        returnToContactPage();
+
     }
 
     public void modify(ContactData contact, int index) {
@@ -78,6 +84,7 @@ public class ContactHelper extends HelperBase {
         editContact();
         Contact(contact);
         updateContact();
+        returnToContactPage();
 
     }
     public boolean isThereAContact() {

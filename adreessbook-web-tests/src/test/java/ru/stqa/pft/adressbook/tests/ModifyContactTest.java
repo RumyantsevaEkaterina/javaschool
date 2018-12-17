@@ -24,10 +24,10 @@ public class ModifyContactTest  extends TestBase {
         List<ContactData> before = app.contact().list();
         ContactData contact = new ContactData()
                     .withFirstname("Maria").withSecondname("Egorova").withDay("1").withMonth("January").withYear("1991");
-        int index = before.size() - 1;
+        int index = before.size() - 2;
         app.contact().modify(contact, index);
         List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(), before.size());
+        Assert.assertEquals(before.size(), after.size());
 
         before.remove(index);
         before.add(contact);
