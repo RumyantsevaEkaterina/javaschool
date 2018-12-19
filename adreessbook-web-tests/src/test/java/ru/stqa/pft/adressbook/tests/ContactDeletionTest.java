@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
-public class DeleteContactTest extends TestBase {
+public class ContactDeletionTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.contact().list().size() == 0) {
@@ -31,8 +31,8 @@ public class DeleteContactTest extends TestBase {
         Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
         app.contact().delete(deletedContact);
+        Assert.assertEquals(app.contact().count(), before.size()-1 );
         Contacts after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() - 1);
         assertThat(after, equalTo(before.without(deletedContact)));
     }
 

@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
-public class CreateContactTest extends TestBase {
+public class ContactCreationTest extends TestBase {
 
     @Test
     public void testCreateContact() throws Exception {
@@ -17,8 +17,8 @@ public class CreateContactTest extends TestBase {
                 .withFirstname("Ekaterina").withSecondname("Rumiantceva").withEmail("katerinka_ru93@bk.ru").withDay("5").withMonth("January").withYear("1993").withMobileNumber("+79216598475");
         app.contact().create(contact);
         app.goTO().home();
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }

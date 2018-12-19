@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 
-public class ModifyContactTest  extends TestBase {
+public class ContactModificationTest extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.contact().list().size() == 0) {
@@ -33,8 +33,8 @@ public class ModifyContactTest  extends TestBase {
         ContactData contact = new ContactData()
                     .withId(modifiedContact.getId()).withFirstname("Maria").withSecondname("Egorova").withDay("1").withMonth("January").withYear("1991");
         app.contact().modify(contact);
+        assertEquals(app.contact().count() ,before.size());
         Contacts after = app.contact().all();
-        assertEquals(before.size(), after.size());
         assertThat(after,equalTo(before.without(modifiedContact).withAdded(contact)));
 
     }
