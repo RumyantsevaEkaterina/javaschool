@@ -8,7 +8,14 @@ public class ContactData {
     private String day;
     private String month;
     private String year;
+    private String home;
     private String mobileNumber;
+    private String workNumber;
+    private String allPhones;
+    private String email2;
+    private String email3;
+    private String allEmails;
+    private String address;
 
 
     public int getId() {
@@ -20,18 +27,43 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withFirstname(String firstname) {
+    public ContactData withFirstName(String firstname) {
         this.firstname = firstname;
         return this;
     }
 
-    public ContactData withSecondname(String secondname) {
+    public ContactData withLastName(String secondname) {
         this.secondname = secondname;
+        return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
 
     public ContactData withEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
         return this;
     }
 
@@ -55,6 +87,19 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withHomeNumber(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public ContactData withWorkNumber(String workNumber) {
+        this.workNumber = workNumber;
+        return this;
+    }
+
+
+
+
     public String getFirstName() {
         return firstname;
     }
@@ -65,6 +110,26 @@ public class ContactData {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
     }
 
     public String getDay() {
@@ -82,6 +147,15 @@ public class ContactData {
     public String getMobileNumber() {
         return mobileNumber;
     }
+
+    public String getHomeNumber() {
+        return home;
+    }
+
+    public String getWorkNumber() {
+        return workNumber;
+    }
+
 
     @Override
     public String toString() {

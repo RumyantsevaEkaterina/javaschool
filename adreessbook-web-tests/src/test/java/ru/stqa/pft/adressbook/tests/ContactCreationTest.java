@@ -12,9 +12,18 @@ public class ContactCreationTest extends TestBase {
 
     @Test
     public void testCreateContact() throws Exception {
+        app.goTO().home();
         Contacts before = app.contact().all();
         ContactData contact = new ContactData()
-                .withFirstname("Ekaterina").withSecondname("Rumiantceva").withEmail("katerinka_ru93@bk.ru").withDay("5").withMonth("January").withYear("1993").withMobileNumber("+79216598475");
+                .withFirstName("Ekaterina")
+                .withLastName("Rumiantceva")
+                .withEmail("katerinka_ru93@bk.ru")
+                .withDay("5")
+                .withMonth("January")
+                .withYear("1993")
+                .withMobileNumber("+79216598475")
+                .withHomeNumber("2514569")
+                .withWorkNumber("1256987");
         app.contact().create(contact);
         app.goTO().home();
         assertThat(app.contact().count(), equalTo(before.size() + 1));

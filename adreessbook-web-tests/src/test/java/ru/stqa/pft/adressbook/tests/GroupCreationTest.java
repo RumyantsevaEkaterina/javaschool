@@ -32,7 +32,7 @@ public class GroupCreationTest extends TestBase {
         Groups after = app.group().all();
 
         assertThat(after.size(), equalTo(before.size()));
-        assertThat(after, equalTo(before)); 
+        assertThat(after, equalTo(before));
     }
 
 }
