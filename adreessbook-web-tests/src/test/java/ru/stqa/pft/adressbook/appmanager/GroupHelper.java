@@ -4,10 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.adressbook.model.GroupData;
+import ru.stqa.pft.adressbook.model.Groups;
 
-import java.util.HashSet;
-import java.util.Set;
+
 import java.util.List;
+import java.util.ArrayList;
 
 public class GroupHelper extends HelperBase {
 
@@ -23,7 +24,7 @@ public class GroupHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillGroupCreation(GroupData groupData) {
+    public void fillGroupForm(GroupData groupData) {
         type(By.name("group_name"), groupData.getName());
         type(By.name("group_header"), groupData.getHeader());
         type(By.name("group_footer"), groupData.getFooter());
@@ -51,7 +52,7 @@ public class GroupHelper extends HelperBase {
 
     public void create(GroupData group) {
         initGroupCreation();
-        fillGroupCreation(group);
+        fillGroupForm(group);
         submitGroupCreation();
         returnToGroupPage();
     }
@@ -59,7 +60,7 @@ public class GroupHelper extends HelperBase {
     public void modify(GroupData group) {
         selectGroupById(group.getId());
         initGroupModification();
-        fillGroupCreation(group);
+        fillGroupForm(group);
         submitGroupModification();
         returnToGroupPage();
     }
@@ -78,8 +79,19 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-   public Set<GroupData> all() {
-        Set<GroupData> groups = new HashSet<GroupData>();
+    public List<GroupData> list() {
+        List<GroupData> groups = new ArrayList<GroupData>();
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+        for (WebElement element : elements) {
+            String name = element.getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")); //prevrashiaem stroku v cislo
+            groups.add(new GroupData().withId(id).withName(name));
+        }
+        return groups;
+    }
+
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();

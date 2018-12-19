@@ -98,10 +98,8 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.cssSelector("tr[name~=entry]"));
         for (WebElement element: elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String firstname = element.findElements(By.tagName("td")).get(2).getText();
-            String secondname = element.findElements(By.tagName("td")).get(1).getText();
-            //String firstname = element.findElement(By.xpath("./td[2]")).getText();
-            //String secondname = element.findElement(By.xpath("./td[3]")).getText();
+            String firstname = element.findElement(By.xpath("./td[2]")).getText();
+            String secondname = element.findElement(By.xpath("./td[3]")).getText();
             ContactData contact = new ContactData().withId(id).withFirstname(firstname).withSecondname(secondname);
             contacts.add(contact);
         }
@@ -110,7 +108,7 @@ public class ContactHelper extends HelperBase {
 
     public Set<ContactData> all() {
         Set<ContactData> contacts = new HashSet<>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("tr[name~=entry]"));
+        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element: elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
             String firstname = element.findElements(By.tagName("td")).get(2).getText();
