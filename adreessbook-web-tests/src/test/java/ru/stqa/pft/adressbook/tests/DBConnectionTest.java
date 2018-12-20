@@ -7,7 +7,8 @@ import ru.stqa.pft.adressbook.model.Groups;
 import java.sql.*;
 
 public class DBConnectionTest {
-    @Test
+
+    @Test(dataProvider = "test")
     public void dbConnection () {
         Connection conn = null;
         try {
