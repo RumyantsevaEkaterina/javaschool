@@ -19,18 +19,18 @@ public class ContactHelper extends HelperBase {
     public void fillContactForm(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("lastname"), contactData.getSecondName());
-        dropDown(By.name("bday"), contactData.getDay());
-        click(By.xpath("//option[@value='5']"));
-        dropDown(By.name("bmonth"), contactData.getMonth());
-        click(By.xpath("//option[@value='1']"));
+        //dropDown(By.name("bday"), contactData.getDay());
+        //click(By.xpath("//option[@value='5']"));
+        //dropDown(By.name("bmonth"), contactData.getMonth());
+       // click(By.xpath("//option[@value='1']"));
+        //type(By.name("byear"), contactData.getYear());
         type(By.name("home"), contactData.getHomeNumber());
-        type(By.name("byear"), contactData.getYear());
         type(By.name("mobile"), contactData.getMobileNumber());
         type(By.name("work"), contactData.getWorkNumber());
         type(By.name("email"), contactData.getEmail());
         type(By.name("email2"), contactData.getEmail());
         type(By.name("email3"), contactData.getEmail());
-        attach(By.name("photo"), contactData.getPhoto());
+        //attach(By.name("photo"), contactData.getPhoto());
 
     }
 
