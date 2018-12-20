@@ -7,22 +7,28 @@ import ru.stqa.pft.adressbook.model.Groups;
 import java.util.*;
 import java.io.*;
 
+import com.thoughtworks.xstream.XStream;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import java.util.stream.Collectors;
 
 public class GroupCreationTest extends TestBase {
 
     @DataProvider
     public Iterator<Object[]> validGroups() throws IOException {
         List<Object[]> list = new ArrayList<Object[]>();
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")));
+        String xml ="";
         String line = reader.readLine();
         while (line != null) {
-            String [] split = line.split(";");
-            list.add(new Object[]{new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+            xml += line;
             line = reader.readLine();
         }
-        return list.iterator();
+        XStream xstream = new XStream();
+        xstream.processAnnotations(GroupData.class);
+        List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
+        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
 
