@@ -12,6 +12,8 @@ import com.thoughtworks.xstream.XStream;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GroupCreationTest extends TestBase {
 
