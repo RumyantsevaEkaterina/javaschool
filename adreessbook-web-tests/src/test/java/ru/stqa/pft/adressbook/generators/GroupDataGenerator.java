@@ -53,9 +53,9 @@ public class GroupDataGenerator {
         XStream xstream = new XStream();
         xstream.processAnnotations(GroupData.class); // reads annotations from GroupData, we change by it tag name to 'group'
         String xml = xstream.toXML(groups);
-        Writer writer =  new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer =  new FileWriter(file)){ // Construction try helps close Writer
+            writer.write(xml);
+        }
     }
 
 
