@@ -5,6 +5,7 @@ import ru.stqa.pft.adressbook.model.GroupData;
 import ru.stqa.pft.adressbook.model.Groups;
 
 import java.util.*;
+import java.io.*;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -12,10 +13,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupCreationTest extends TestBase {
 
     @DataProvider
-    public Iterator<Object[]> validGroups(){
+    public Iterator<Object[]> validGroups() throws IOException {
         List<Object[]> list = new ArrayList<Object[]>();
-        list.add(new Object[] {new GroupData().withName("test1").withHeader("header2").withFooter("foter3")});
-        list.add(new Object[] {new GroupData().withName("test2").withHeader("header2").withFooter("foter3")});
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+        String line = reader.readLine();
+        while (line != null) {
+            String [] split = line.split(";");
+            list.add(new Object[]{new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+            line = reader.readLine();
+        }
         return list.iterator();
     }
 
