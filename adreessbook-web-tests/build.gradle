@@ -28,6 +28,10 @@ dependencies {
             systemProperty 'target', "${target}"
             // now we could select browser in console ./gradlew -Pbrowser=chrome testContacts
         }
+
+        if (project.hasProperty('verifyUI')) {
+            systemProperty 'verifyUI', "${verifyUI}"
+        }
     }
 
     task testContacts (type: Test) {
@@ -41,6 +45,10 @@ dependencies {
         }
         if (project.hasProperty('target')) {
             systemProperty 'target', "${target}"
+        }
+
+        if (project.hasProperty('verifyUI')) {
+            systemProperty 'verifyUI', "${verifyUI}"
         }
     }
 
