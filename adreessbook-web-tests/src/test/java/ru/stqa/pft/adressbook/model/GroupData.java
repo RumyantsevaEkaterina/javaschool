@@ -3,6 +3,7 @@ package ru.stqa.pft.adressbook.model;
 import java.util.Objects;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import com.google.gson.annotations.Expose;
 
 import org.hibernate.annotations.Type;
 
@@ -21,11 +22,14 @@ public class GroupData {
     @Id
     @Column(name = "group_id")
     private int id = Integer.MAX_VALUE;
+    @Expose
     @Column(name = "group_name")
     private String name;
+    @Expose
     @Column(name = "group_header")
     @Type(type = "text")
     private String header;
+    @Expose
     @Column(name = "group_footer")
     @Type(type = "text")
     private String footer;
@@ -78,13 +82,19 @@ public class GroupData {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         GroupData groupData = (GroupData) o;
-        return id == groupData.id &&
-             Objects.equals(name, groupData.name);
+        if (id != groupData.id) return false;
+        if (name != null ? !name.equals(groupData.name) : groupData.name != null) return false;
+        if (header != null ? !header.equals(groupData.header) : groupData.header != null) return false;
+        return footer != null ? footer.equals(groupData.footer) : groupData.footer == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (header != null ? header.hashCode() : 0);
+        result = 31 * result + (footer != null ? footer.hashCode() : 0);
+        return result;
     }
 
 }
