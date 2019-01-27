@@ -1,44 +1,81 @@
 package ru.stqa.pft.adressbook.model;
 
+
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.io.File;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
-    @XStreamOmitField
+
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;;
+
+    @Column(name = "firstname")
     @Expose
     private String firstname;
+
+    @Column(name = "lastname")
     @Expose
-    private String secondname;
+    private String lastname;
+
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
+
     @Expose
-    private String day;
-    @Expose
-    private String month;
-    @Expose
-    private String year;
-    @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String home;
+
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobileNumber;
+
     @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String workNumber;
+
+    @Transient
     @Expose
+    @Column(name = "allPhones")
+    @Type(type = "text")
     private String allPhones;
+
     @Expose
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
+
     @Expose
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
+
+    @Transient
     @Expose
+    @Column(name = "allEmails")
+    @Type(type = "text")
     private String allEmails;
+
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
-    @Expose
-    private File photo;
+
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
+
 
 
     public int getId() {
@@ -55,13 +92,18 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withLastName(String secondname) {
-        this.secondname = secondname;
+    public ContactData withLastName(String lastname) {
+        this.lastname = lastname;
         return this;
     }
 
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
         return this;
     }
 
@@ -85,26 +127,6 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withAllEmails(String allEmails) {
-        this.allEmails = allEmails;
-        return this;
-    }
-
-    public ContactData withDay(String day) {
-        this.day = day;
-        return this;
-    }
-
-    public ContactData withMonth(String month) {
-        this.month = month;
-        return this;
-    }
-
-    public ContactData withYear(String year) {
-        this.year = year;
-        return this;
-    }
-
     public ContactData withMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
         return this;
@@ -121,20 +143,20 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public String getFirstName() {
         return firstname;
     }
 
-    public String getSecondName() {
-        return secondname;
+    public String getLastName() {
+        return lastname;
     }
 
     public String getEmail() {
@@ -161,18 +183,6 @@ public class ContactData {
         return allPhones;
     }
 
-    public String getDay() {
-        return day;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -191,7 +201,9 @@ public class ContactData {
         return "ContactData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
-                ", secondname='" + secondname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", homePhone='" + home + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 
@@ -204,14 +216,22 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        return secondname != null ? secondname.equals(that.secondname) : that.secondname == null;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        if (home != null ? !home.equals(that.home) : that.home != null) return false;
+        if (allPhones != null ? !allPhones.equals(that.allPhones) : that.allPhones != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        return allEmails != null ? allEmails.equals(that.allEmails) : that.allEmails == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-        result = 31 * result + (secondname != null ? secondname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (home != null ? home.hashCode() : 0);
+        result = 31 * result + (allPhones != null ? allPhones.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (allEmails != null ? allEmails.hashCode() : 0);
         return result;
     }
 }
