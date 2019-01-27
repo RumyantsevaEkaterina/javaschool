@@ -61,7 +61,7 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData()
                     .withFirstName(String.format("Ekaterina %s", i))
-                    .withLastName(String.format("Rumiantceva %s", i))
+                    .withLastName(String.format("Rum %s", i))
                     //.withDay(String.format("5 %s", i))
                     //.withMonth(String.format("1 %s", i))
                     //.withYear(String.format("1993 %s", i))

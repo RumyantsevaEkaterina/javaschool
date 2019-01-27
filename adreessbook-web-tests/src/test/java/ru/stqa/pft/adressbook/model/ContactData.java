@@ -216,7 +216,7 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        //if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
         if (home != null ? !home.equals(that.home) : that.home != null) return false;
         if (allPhones != null ? !allPhones.equals(that.allPhones) : that.allPhones != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
