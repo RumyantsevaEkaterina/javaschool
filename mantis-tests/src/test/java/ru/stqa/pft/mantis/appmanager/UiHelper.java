@@ -16,14 +16,14 @@ public class UiHelper extends HelperBase{
     public void login(String username, String password){
         wd.get(app.getProperty("web.baseUrl") + "/login_page.php");
         type(By.name("username"), username);
-        click(By.cssSelector("input[value='Login']"));
+        click(By.cssSelector("input[value='Войти']"));
         type(By.name("password"), password);
-        click(By.cssSelector("input[value='Login']"));
+        click(By.cssSelector("input[value='Войти']"));
     }
 
     public void logout(){
-        click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='administrator'])[1]/following::i[1]"));
-        click(By.linkText("Logout"));
+      //  click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='administrator'])[1]/following::i[1]"));
+        click(By.linkText("выход"));
     }
 
     public void manageUsers() {
@@ -43,7 +43,7 @@ public class UiHelper extends HelperBase{
     }
 
     public void resetPasswordByAdmin() {
-        click( By.xpath( "//input[@value='Reset Password']" ) );
+        click( By.xpath( "//input[@value='Сбросить пароль']" ) );
     }
 
     public void submitResetPasswordByUser(String resetPasswordLink, String name, String password) {
@@ -52,7 +52,7 @@ public class UiHelper extends HelperBase{
         type(By.name("realname"), name);
         type(By.name("password"), password);
         type(By.name("password_confirm"), password);
-        click(By.cssSelector("button[type='submit']"));
+        click(By.cssSelector("input[value='Изменить учетную запись']"));
     }
 
     public void exit() {

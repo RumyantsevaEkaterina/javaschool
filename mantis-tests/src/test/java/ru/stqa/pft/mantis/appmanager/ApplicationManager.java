@@ -13,31 +13,42 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager {
+public class ApplicationManager  {
     private final Properties properties;
-    private WebDriver wd;
-    private FtpHelper ftp;
-    private MailHelper mailHelper;
-
+    WebDriver wd;
 
     private String browser;
     private RegistrationHelper registrationHelper;
+    private FtpHelper ftp;
+    private MailHelper mailHelper;
+    private JamesHelper jamesHelper;
+    private DbHelper dbHelper;
+    private UserHelper userHelper;
+    private UiHelper ui;
 
-    public ApplicationManager(String browser)  {
+    public ApplicationManager(String browser) throws IOException {
         this.browser = browser;
-        System.getProperty("target", "local");
         properties = new Properties();
-
-
     }
 
-    public void Init() throws IOException{
+    public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        dbHelper = new DbHelper();
 
+        if (browser.equals(BrowserType.FIREFOX)) {
+            wd = new FirefoxDriver();
+        } else if (browser.equals(BrowserType.CHROME)) {
+            wd = new ChromeDriver();
+        } else if (browser.equals(BrowserType.IE)) {
+            wd = new InternetExplorerDriver();
+        }
+
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.get(properties.getProperty("web.baseUrl"));
     }
 
-    public void stop() {
+        public void stop() {
         if (wd != null) {
             wd.quit();
         }
@@ -49,6 +60,23 @@ public class ApplicationManager {
 
     public String getProperty(String key) {
         return properties.getProperty(key);
+    }
+
+    public WebDriver getDriver() {
+        if (wd == null) {
+            if (browser.equals( BrowserType.FIREFOX )) {
+                wd = new FirefoxDriver( );
+            } else if (browser.equals( BrowserType.CHROME )) {
+                    wd = new ChromeDriver( );
+            } else if (browser.equals( BrowserType.IE )) {
+                wd = new InternetExplorerDriver( );
+            }
+
+            wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            wd.get(properties.getProperty("web.baseUrl"));
+
+        }
+        return wd;
     }
 
     public RegistrationHelper registration() {
@@ -65,26 +93,39 @@ public class ApplicationManager {
         return ftp;
     }
 
-    public WebDriver getDriver() {
-        if (wd == null) {
-            if (browser.equals(BrowserType.FIREFOX)) {
-                wd = new FirefoxDriver();
-            } else if (browser.equals(BrowserType.CHROME)) {
-                wd = new ChromeDriver();
-            } else if (browser.equals(BrowserType.IE)) {
-                wd = new InternetExplorerDriver();
-            }
-            wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            wd.get(properties.getProperty("web.baseUrl"));
-        }
-        return wd;
-    }
-
     public MailHelper mail() {
         if (mailHelper == null) {
             mailHelper = new MailHelper(this);
         }
         return mailHelper;
+    }
+
+    public JamesHelper james() {
+        if (jamesHelper == null) {
+            jamesHelper = new JamesHelper(this);
+        }
+        return jamesHelper;
+    }
+
+    public DbHelper db() {
+        if (dbHelper == null) {
+            dbHelper = new DbHelper();
+        }
+        return dbHelper;
+    }
+
+    public UserHelper user() {
+        if (userHelper == null) {
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;
+    }
+
+    public UiHelper ui() {
+        if (ui == null) {
+            ui = new UiHelper(this);
+        }
+        return ui;
     }
 
 }

@@ -1,29 +1,36 @@
 package ru.stqa.pft.mantis.tests;
 
 import org.openqa.selenium.remote.BrowserType;
-import ru.stqa.pft.mantis.appmanager.ApplicationManager;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import ru.stqa.pft.mantis.appmanager.ApplicationManager;
+import ru.stqa.pft.mantis.appmanager.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
 
 public class TestBase {
 
-    protected static final ApplicationManager app
-            = new ApplicationManager(System.getProperty("browser",BrowserType.FIREFOX));
+    protected static ApplicationManager app = null;
 
+    static {
+        try {
+            app = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @BeforeSuite
     public void setUp() throws Exception {
-        app.Init();
+        app.init( );
         app.ftp().upload(new File("src/test/resources/config_inc.php"), "config/config_inc.php", "config/config_inc.php.bak");
     }
 
     @AfterSuite (alwaysRun = true)
-    public void tearDown() throws IOException {
-            app.ftp().restore("config/config_inc.php.bak", "config/config_inc.php");
-        app.stop();
+    public void tearDown() throws Exception {
+        app.ftp().restore("config/config_inc.php.bak", "config/config_inc.php");
+        app.stop( );
     }
 
 
