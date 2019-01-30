@@ -1,6 +1,5 @@
 package ru.stqa.pft.mantis.appmanager;
 
-import org.apache.http.impl.client.HttpClients;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,6 +24,7 @@ public class ApplicationManager  {
     private DbHelper dbHelper;
     private UserHelper userHelper;
     private UiHelper ui;
+    private SoapHelper soapHelper;
 
     public ApplicationManager(String browser) throws IOException {
         this.browser = browser;
@@ -126,6 +126,13 @@ public class ApplicationManager  {
             ui = new UiHelper(this);
         }
         return ui;
+    }
+
+    public SoapHelper soap() {
+        if (soapHelper == null) {
+            soapHelper = new SoapHelper(this);
+        }
+        return soapHelper;
     }
 
 }
