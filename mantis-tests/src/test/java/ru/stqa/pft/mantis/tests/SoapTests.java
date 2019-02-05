@@ -31,7 +31,7 @@ public class SoapTests extends TestBase {
         assertEquals(issue.getSummary(), created.getSummary());
     }
 
-    @Test(enabled = false)
+    @Test
     public void testIssueStatus () {
         int issueId = 1;
 
